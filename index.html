@@ -17,6 +17,8 @@
       --max-w:420px;
       --gap:14px;
       --tap-size:56px; /* target height for touch */
+      --accent-btn-bg: #f7f8f9;
+      --accent-btn-border: #e6e9ec;
     }
     /* reset & layout */
     *{box-sizing:border-box}
@@ -162,12 +164,43 @@
       text-align:center;
     }
 
+    /* add-contact button */
+    .add-row{
+      width:100%;
+      display:flex;
+      justify-content:center;
+      margin-top:4px;
+    }
+    .btn-add {
+      -webkit-appearance: none;
+      appearance: none;
+      border: 1px solid var(--accent-btn-border);
+      background: var(--accent-btn-bg);
+      padding:10px 16px;
+      border-radius:12px;
+      font-weight:700;
+      cursor:pointer;
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      color:var(--text);
+      transition: background .12s ease, transform .06s ease;
+      width:100%;
+      max-width:320px;
+      justify-content:center;
+    }
+    .btn-add:active{ transform: translateY(1px) }
+    .btn-add:hover{ background:#f8f9fa }
+
+    .btn-add svg{ width:18px; height:18px; color:var(--muted) }
+
     /* small screens: tighter */
     @media (max-width:420px){
       .card{padding:18px}
       .avatar{width:88px;height:88px;border-radius:18px}
       .contact{height:52px}
       .contact .icon{width:32px;height:32px;min-width:32px}
+      .btn-add{padding:10px}
     }
   </style>
 </head>
@@ -191,7 +224,7 @@
     <div class="sep" role="separator" aria-hidden="true"></div>
 
     <div class="contacts">
-      <a class="contact" href="tel:+79998887766" aria-label="Позвонить на личный">
+      <a class="contact" href="tel:+79099570768" aria-label="Позвонить на личный">
         <div class="icon" aria-hidden="true">
           <!-- phone icon (monochrome) -->
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -204,7 +237,7 @@
         </div>
       </a>
 
-      <a class="contact" href="tel:+74951234567" aria-label="Позвонить на рабочий">
+      <a class="contact" href="tel:+74994303639" aria-label="Позвонить на рабочий">
         <div class="icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.08 4.18 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.72c.12 1.05.38 2.07.76 3.03a2 2 0 0 1-.45 2.11L9.91 10.09a16 16 0 0 0 6 6l.23-.23a2 2 0 0 1 2.11-.45c.96.38 1.98.64 3.03.76A2 2 0 0 1 22 16.92z"/>
@@ -216,7 +249,7 @@
         </div>
       </a>
 
-      <a class="contact" href="mailto:olga@iprus.ru" aria-label="Отправить email">
+      <a class="contact" href="mailto:o_khokhlysheva@sitra-group.com" aria-label="Отправить email">
         <div class="icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M4 4h16v16H4z" />
@@ -229,7 +262,7 @@
         </div>
       </a>
 
-      <a class="contact site" href="https://sitra-group.ru" target="_blank" rel="noopener" aria-label="Открыть сайт">
+      <a class="contact site" href="https://sitra-group.ru" target="_blank" rel="noopener" aria-label="Открыть сайт sitra-group.ru">
         <div style="display:flex;align-items:center;gap:12px">
           <div class="icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -246,7 +279,7 @@
         <div class="visit" aria-hidden="true">Открыть</div>
       </a>
 
-      <a class="contact site" href="https://sitra-cleaning.ru" target="_blank" rel="noopener" aria-label="Открыть сайт">
+      <a class="contact site" href="https://sitra-cleaning.ru" target="_blank" rel="noopener" aria-label="Открыть сайт sitra-cleaning.ru">
         <div style="display:flex;align-items:center;gap:12px">
           <div class="icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -262,12 +295,87 @@
 
         <div class="visit" aria-hidden="true">Открыть</div>
       </a>
-
-
-
     </div>
 
     <p class="note">Нажмите на номер или почту — телефон/почта откроются автоматически.</p>
+
+    <!-- ADD TO CONTACTS BUTTON -->
+    <div class="add-row" aria-hidden="false">
+      <button id="add-contact-btn" class="btn-add" aria-label="Добавить контакт">
+        <!-- icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="10" cy="7" r="4"></circle>
+          <path d="M21 8v6M18 11h6"></path>
+        </svg>
+        Добавить в контакты
+      </button>
+    </div>
   </main>
+
+  <script>
+    (function(){
+      // данные контакта — синхронизированы с HTML выше
+      const vcardText = [
+        "BEGIN:VCARD",
+        "VERSION:3.0",
+        "N:Хохлышева;Ольга;;;",
+        "FN:Хохлышева Ольга",
+        "ORG:ООО \"ИПРУС\"",
+        "TITLE:Генеральный директор",
+        "TEL;TYPE=CELL:+79099570768",
+        "TEL;TYPE=WORK,VOICE:+74994303639",
+        "EMAIL;TYPE=INTERNET:o_khokhlysheva@sitra-group.com",
+        "URL:https://sitra-group.ru",
+        "URL:https://sitra-cleaning.ru",
+        // если хотите, можно добавить ADR или NOTE:
+        // "ADR;TYPE=WORK:;;ул. Примерная, 1;Москва;;123456;Россия",
+        "END:VCARD"
+      ].join("\\r\\n");
+
+      function downloadVCard(filename, content) {
+        const blob = new Blob([content], {type: 'text/vcard;charset=utf-8'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        // Safari on iOS may not honor download attribute; still, clicking is best-effort
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(()=> {
+          URL.revokeObjectURL(url);
+          a.remove();
+        }, 1200);
+      }
+
+      async function tryShareFile(filename, content) {
+        try {
+          const blob = new Blob([content], {type: 'text/vcard'});
+          const file = new File([blob], filename, {type: 'text/vcard'});
+          if (navigator.canShare && navigator.canShare({files: [file]})) {
+            await navigator.share({
+              files: [file],
+              title: 'Контакт — Хохлышева Ольга',
+              text: 'Добавьте контакт'
+            });
+            return true;
+          }
+        } catch (e) {
+          // ignore and fallback
+          console.warn('Web Share failed or unsupported:', e);
+        }
+        return false;
+      }
+
+      document.getElementById('add-contact-btn').addEventListener('click', async function(){
+        const filename = 'olga_khokhlysheva.vcf';
+        const shared = await tryShareFile(filename, vcardText);
+        if (!shared) {
+          // fallback: download .vcf
+          downloadVCard(filename, vcardText);
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
