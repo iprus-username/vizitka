@@ -1,208 +1,253 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Хохлышева Ольга — Визитка</title>
-  <meta name="description" content="Электронная визитка — Хохлышева Ольга, генеральный директор">
+  <meta name="description" content="Электронная визитка — Хохлышева Ольга, генеральный директор" />
 
-  <!-- Styles: серые тона + оранжевые акценты -->
   <style>
     :root{
-      --bg: #f3f4f6; /* светло-серый */
-      --card-bg: #ffffff;
-      --muted: #6b7280; /* серый текст */
-      --accent: #ff6a00; /* оранжевый */
-      --radius: 14px;
-      --max-w: 420px;
-      --gutter: 18px;
+      --bg:#f6f7f8;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --text:#111827;
+      --soft:#eef0f2;
+      --radius:16px;
+      --max-w:420px;
+      --gap:14px;
+      --tap-size:56px; /* target height for touch */
     }
+    /* reset & layout */
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
       font-family: Inter, Roboto, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial;
-      background: linear-gradient(180deg, var(--bg), #eef2f6);
+      background: linear-gradient(180deg,var(--bg),#eef2f4);
       display:flex;
       align-items:center;
       justify-content:center;
-      padding:32px;
+      padding:20px;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      color:var(--text);
     }
 
+    /* card */
     .card{
       width:100%;
       max-width:var(--max-w);
-      background:var(--card-bg);
+      background:var(--card);
       border-radius:var(--radius);
-      box-shadow: 0 8px 30px rgba(16,24,40,0.08);
-      padding: calc(var(--gutter) * 1.3);
+      box-shadow: 0 10px 30px rgba(16,24,40,0.06);
+      padding:22px;
       display:flex;
-      gap:16px;
+      flex-direction:column;
+      gap:var(--gap);
       align-items:center;
     }
 
+    /* avatar on top */
     .avatar{
-      flex: 0 0 88px;
-      width:88px;
-      height:88px;
-      border-radius:12px;
-      background:linear-gradient(180deg,#fff,#f8fafc);
+      width:96px;
+      height:96px;
+      border-radius:20px;
       display:flex;
       align-items:center;
       justify-content:center;
-      border: 1px solid #e6e8eb;
       overflow:hidden;
+      background:linear-gradient(180deg,#fff,#f3f6f8);
+      border:1px solid #e6e9ec;
+      flex-shrink:0;
     }
 
-    .info{flex:1}
-
+    /* INFO */
     .name{
+      margin:8px 0 0 0;
       font-size:1.05rem;
-      font-weight:600;
-      color:#111827;
-      margin:0 0 4px 0;
+      font-weight:700;
+      letter-spacing:0.2px;
+      text-align:center;
     }
     .role{
-      margin:0;
-      font-size:0.88rem;
+      margin:4px 0 0 0;
+      font-size:0.86rem;
       color:var(--muted);
+      text-align:center;
       font-weight:500;
     }
 
-    .contacts{
+    /* divider */
+    .sep{
+      width:100%;
+      height:1px;
+      background:var(--soft);
+      border-radius:2px;
       margin-top:12px;
-      display:grid;
-      gap:8px;
+    }
+
+    /* contacts column */
+    .contacts{
+      width:100%;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-top:6px;
     }
 
     .contact{
       display:flex;
-      gap:10px;
       align-items:center;
-      padding:8px 10px;
+      gap:12px;
+      height:var(--tap-size);
+      padding:10px 12px;
+      border-radius:12px;
+      text-decoration:none;
+      color:var(--text);
+      background:transparent;
+      border:1px solid transparent;
+      transition: background .14s ease, border-color .14s ease, transform .06s ease;
+    }
+    .contact:active{ transform: translateY(1px) }
+    .contact:hover{
+      background:#fbfcfd;
+      border-color:#eef2f4;
+    }
+
+    .contact .icon{
+      width:36px;
+      height:36px;
+      min-width:36px;
+      min-height:36px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
       border-radius:10px;
-      background:#fbfbfc;
-      border:1px solid #f0f1f3;
-      font-size:0.95rem;
-      color:#111827;
-      text-decoration:none;
+      background:#fafbfb;
+      border:1px solid #f0f2f4;
+      color:var(--muted);
+      flex-shrink:0;
     }
 
-    .contact .label{color:var(--muted); font-size:0.8rem}
-    .contact svg{width:18px;height:18px;flex:0 0 18px}
-
-    .link{
-      color:var(--accent);
+    .contact .text{
+      display:flex;
+      flex-direction:column;
+      line-height:1;
+    }
+    .contact .label{
+      font-size:0.90rem;
       font-weight:600;
-      text-decoration:none;
+    }
+    .contact .sub{
+      font-size:0.82rem;
+      color:var(--muted);
+      margin-top:4px;
     }
 
-    .small{
-      margin-top:10px;
+    /* site row has action on right */
+    .contact.site{
+      justify-content:space-between;
+    }
+    .visit{
+      font-size:0.86rem;
+      color:var(--muted);
+      font-weight:600;
+    }
+
+    .note{
+      margin-top:6px;
       font-size:0.78rem;
       color:var(--muted);
+      text-align:center;
     }
 
-    /* Mobile: карточка в колонку */
+    /* small screens: tighter */
     @media (max-width:420px){
-      .card{flex-direction:row;gap:12px;padding:16px}
-      .avatar{width:74px;height:74px}
+      .card{padding:18px}
+      .avatar{width:88px;height:88px;border-radius:18px}
+      .contact{height:52px}
+      .contact .icon{width:32px;height:32px;min-width:32px}
     }
   </style>
 </head>
 <body>
-  <main class="card" role="main">
-    <div class="avatar" aria-hidden="true">
-      <!-- Нейтральная силуэтная иконка (можно заменить фото) -->
-      <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="аватар">
-        <defs>
-          <linearGradient id="g" x1="0" x2="1">
-            <stop offset="0" stop-color="#f8f9fa"/>
-            <stop offset="1" stop-color="#e9eef6"/>
-          </linearGradient>
-        </defs>
-        <rect width="120" height="120" rx="12" fill="url(#g)"/>
-        <!-- female silhouette simplified -->
-        <g transform="translate(12,12)" fill="#cbd5e1">
-          <circle cx="48" cy="28" r="18" fill="#94a3b8"/>
-          <path d="M6 92c0-18 20-32 42-32s42 14 42 32v6H6v-6z" fill="#94a3b8"/>
+  <main class="card" role="main" aria-labelledby="vcard-name">
+    <!-- AVATAR: замените <svg> на <img src="photo.jpg" alt="Ольга Хохлышева"> -->
+    <div class="avatar" aria-hidden="false">
+      <!-- нейтральный силуэт -->
+      <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" role="img" aria-label="аватар">
+        <rect width="120" height="120" rx="18" fill="#fbfcfd"/>
+        <g transform="translate(12,12)" fill="#c6ccd4">
+          <circle cx="48" cy="28" r="20" />
+          <path d="M6 94c0-20 22-36 44-36s44 16 44 36v6H6v-6z" />
         </g>
       </svg>
     </div>
 
-    <div class="info">
-      <h1 class="name">Хохлышева Ольга</h1>
-      <p class="role">Генеральный директор ООО "ИПРУС"</p>
+    <h1 id="vcard-name" class="name">Хохлышева Ольга</h1>
+    <p class="role">Генеральный директор ООО "ИПРУС"</p>
 
-      <div class="contacts">
-        <a class="contact" href="tel:+79998887766">
-          <!-- phone icon -->
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-            <path d="M3 5c0-1.1.9-2 2-2h2.2c.6 0 1.1.4 1.3 1l.9 2.2c.2.6 0 1.3-.5 1.7l-1.2.9c1.9 3.5 5.1 6.7 8.6 8.6l.9-1.2c.4-.5 1.1-.7 1.7-.5L19 15.5c.6.2 1 .7 1 1.3V19c0 1.1-.9 2-2 2H5c-2.2 0-4-1.8-4-4V7z" fill="#111827" opacity="0.9"/>
+    <div class="sep" role="separator" aria-hidden="true"></div>
+
+    <div class="contacts">
+      <a class="contact" href="tel:+79998887766" aria-label="Позвонить на личный">
+        <div class="icon" aria-hidden="true">
+          <!-- phone icon (monochrome) -->
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.08 4.18 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.72c.12 1.05.38 2.07.76 3.03a2 2 0 0 1-.45 2.11L9.91 10.09a16 16 0 0 0 6 6l.23-.23a2 2 0 0 1 2.11-.45c.96.38 1.98.64 3.03.76A2 2 0 0 1 22 16.92z"/>
           </svg>
-          <div>
-            <div style="font-size:0.95rem; font-weight:600">Личный</div>
-            <div class="label">+7 (999) 888-77-66</div>
-          </div>
-        </a>
+        </div>
+        <div class="text">
+          <div class="label">Личный</div>
+          <div class="sub">+7 (999) 888-77-66</div>
+        </div>
+      </a>
 
-        <a class="contact" href="tel:+74951234567">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-            <path d="M3 5c0-1.1.9-2 2-2h2.2c.6 0 1.1.4 1.3 1l.9 2.2c.2.6 0 1.3-.5 1.7l-1.2.9c1.9 3.5 5.1 6.7 8.6 8.6l.9-1.2c.4-.5 1.1-.7 1.7-.5L19 15.5c.6.2 1 .7 1 1.3V19c0 1.1-.9 2-2 2H5c-2.2 0-4-1.8-4-4V7z" fill="#111827" opacity="0.9"/>
+      <a class="contact" href="tel:+74951234567" aria-label="Позвонить на рабочий">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.08 4.18 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.72c.12 1.05.38 2.07.76 3.03a2 2 0 0 1-.45 2.11L9.91 10.09a16 16 0 0 0 6 6l.23-.23a2 2 0 0 1 2.11-.45c.96.38 1.98.64 3.03.76A2 2 0 0 1 22 16.92z"/>
           </svg>
-          <div>
-            <div style="font-size:0.95rem; font-weight:600">Рабочий</div>
-            <div class="label">+7 (495) 123-45-67</div>
-          </div>
-        </a>
+        </div>
+        <div class="text">
+          <div class="label">Рабочий</div>
+          <div class="sub">+7 (495) 123-45-67</div>
+        </div>
+      </a>
 
-        <a class="contact" href="mailto:olga@iprus.ru">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-            <path d="M3 6.5A2.5 2.5 0 0 1 5.5 4h13A2.5 2.5 0 0 1 21 6.5v11A2.5 2.5 0 0 1 18.5 20h-13A2.5 2.5 0 0 1 3 17.5v-11z" stroke="#111827" stroke-width="0.8" fill="#fff" opacity="0.9"/>
-            <path d="M4 6.8l8 7 8-7" stroke="#111827" stroke-width="0.8" fill="none"/>
+      <a class="contact" href="mailto:olga@iprus.ru" aria-label="Отправить email">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 4h16v16H4z" />
+            <polyline points="22,6 12,13 2,6" />
           </svg>
-          <div>
-            <div style="font-size:0.95rem; font-weight:600">Email</div>
-            <div class="label">olga@iprus.ru</div>
-          </div>
-        </a>
+        </div>
+        <div class="text">
+          <div class="label">Email</div>
+          <div class="sub">olga@iprus.ru</div>
+        </div>
+      </a>
 
-        <a class="contact" href="https://iprus.ru" target="_blank" rel="noopener" style="justify-content:space-between">
-          <div style="display:flex;gap:10px;align-items:center">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-              <path d="M12 2a10 10 0 100 20 10 10 0 000-20zM8.5 14.8h7v1.2h-7v-1.2z" fill="#111827" opacity="0.9"/>
+      <a class="contact site" href="https://iprus.ru" target="_blank" rel="noopener" aria-label="Открыть сайт">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M2 12h20M12 2c4 4 4 16 0 20" />
             </svg>
-            <div>
-              <div style="font-size:0.95rem; font-weight:600">Сайт</div>
-              <div class="label">www.iprus.ru</div>
-            </div>
           </div>
-          <div class="link">Открыть</div>
-        </a>
-      </div>
+          <div class="text">
+            <div class="label">Сайт</div>
+            <div class="sub">iprus.ru</div>
+          </div>
+        </div>
 
-      <p class="small">Нажмите на телефон/почту, чтобы позвонить или отправить письмо.</p>
+        <div class="visit" aria-hidden="true">Открыть</div>
+      </a>
     </div>
+
+    <p class="note">Нажмите на номер или почту — телефон/почта откроются автоматически.</p>
   </main>
-
-  <!--
-    === Быстрая инструкция по развёртыванию на GitHub Pages ===
-
-    1) Создайте новый публичный репозиторий на GitHub (например: iprus-card).
-    2) Клонируйте локально или загрузите файл index.html через веб-интерфейс.
-       (если хотите — создайте ветку main и добавьте файл)
-    3) В репозитории зайдите в Settings -> Pages.
-       Выберите ветку 'main' (или 'gh-pages') и папку '/' (root), сохраните.
-    4) Через минуту сайт будет доступен по адресу: https://<ваш-логин>.github.io/<repo-name>/
-
-    Альтернатива (Netlify / Vercel): просто перетащите папку с index.html на страницу деплоя (drag & drop) — и получите готовую ссылку.
-
-    Как заменить аватар:
-      - Замените блок <div class="avatar">...svg...</div> на <img src="/path/to/photo.jpg" alt="Ольга" style="width:100%;height:100%;object-fit:cover"> 
-      - Или укажите внешний URL: <img src="https://.../photo.jpg">.
-
-    Хотите, чтобы я упаковал это в zip, сгенерировал QR-код и подготовил шаги с командам git? Напишите "Дай zip" или "Подготовь git-инструкции".
-  -->
-
 </body>
 </html>
